@@ -15,10 +15,7 @@ Please specify database connections in `.env.development`, `.env.test` files. (M
 `ormconfig.json` file is generated automatically with based on the npm tasks so no need to create it manually for this demo.
 
 ## Running Migration
-You'll need to run the migration to setup initial tables:
-```bash
-$ npm run typeorm -- migration:run
-```
+You'll NOT need to run the migration to setup initial tables, It is taken care by the package.json tasks
 
 ## Running the app
 
