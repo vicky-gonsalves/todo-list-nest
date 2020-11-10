@@ -19,7 +19,8 @@ export class TodoService {
   constructor(
     @InjectRepository(TodoEntity)
     private readonly todoRepo: Repository<TodoEntity>,
-  ) {}
+  ) {
+  }
 
   private responseObject = (todo: TodoEntity): TodoSO => {
     return todo;
@@ -31,11 +32,12 @@ export class TodoService {
   ): Promise<Pagination<TodoSO>> {
     const queryBuilder = this.todoRepo.createQueryBuilder('t');
     if (todoDTO.hasOwnProperty('q')) {
+      const q = todoDTO.q.toLowerCase();
       queryBuilder.where(
-        't.title LIKE :title OR t.description LIKE :description',
+        'LOWER(t.title) LIKE :title OR LOWER(t.description) LIKE :description',
         {
-          title: `%${todoDTO.q}%`,
-          description: `%${todoDTO.q}%`,
+          title: `%${q}%`,
+          description: `%${q}%`,
         },
       );
     }
